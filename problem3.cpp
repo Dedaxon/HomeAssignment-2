@@ -4,6 +4,9 @@
 using namespace std;
 
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
     int q;
     cin >> q;
     vector<int> arr;
@@ -17,19 +20,20 @@ int main() {
             cin >> x;
             arr.push_back(x);
         } 
-        else if (cmd == "get") {
-            string next;
-            cin >> next; // expecting "max"
+        else if (cmd == "get" || cmd == "getmax" || cmd == "get_max") {
+            string maybe;
+            if (cmd == "get") cin >> maybe; // skip "max" if two-word form
             if (arr.empty()) cout << "EMPTY\n";
             else {
                 int mx = arr[0];
-                for (int v : arr) mx = max(mx, v);
+                for (int v : arr)
+                    if (v > mx) mx = v;
                 cout << mx << "\n";
             }
         } 
-        else if (cmd == "extract") {
-            string next;
-            cin >> next; // expecting "max"
+        else if (cmd == "extract" || cmd == "extractmax" || cmd == "extract_max") {
+            string maybe;
+            if (cmd == "extract") cin >> maybe; 
             if (arr.empty()) cout << "EMPTY\n";
             else {
                 int idx = 0;
